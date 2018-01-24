@@ -7,5 +7,6 @@ header-img: "img/header_img/Iron-Man-3.jpg"
 comments: true
 ---
 
-> 光有好奇心而不去實踐，等於自願放棄成功機會
-> 別為自己畫地自限，Just Do It！！
+> 일단 해봅니다...
+> 
+> 디버깅이 재미있습니다. 변태입니다.
