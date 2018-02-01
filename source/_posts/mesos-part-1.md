@@ -1,5 +1,5 @@
 ---
-title: mesos-part-1
+title: "마라톤 어플리케이션 - 1"
 catalog: true
 date: 2018-01-24 18:47:31
 subtitle:
@@ -7,121 +7,129 @@ header-img:
 tags:
 ---
 
-# Mesos Marathon doc분석
----
-> 메소스 미션이당..
-
+> 아래 문서는 마라톤 공식Document를 번역 및 응용한 결과물입니다.
+(https://mesosphere.github.io/marathon/docs/application-basics.html)
 
 ---
-제가 html5게임들을 만들면서
-가장 유용하고 자주 사용한 자료구조, `배열`입니다
-`push` `pop` `shift` `unshift`등의 기본 함수들을 사용해
-손쉽게 데이터를 조작할 수 있습니다.
-더 나아가 멋지게 배열들을 다룰 수 있는 중급 함수들을 공부해봅시다.
 
-## forEach
----
-해당 배열의 요소 하나하나를 순회하면서 반복문을 돕니다.
-```
-array.forEach(callback [, thisArg])
-```
-첫번째 인자 `callback(item, index, array)``
-두번째 인자 `thisArg` // 콜백함수 사용시 this로서 사용되는 값
+# Mesos Marathon - Application Basic
 
-```javascript
-var fruits = ['사과', '바나나', '배']
-fruits.forEach(function (item, index, array) {
-  console.log(item, index);
-});
-// 사과 0
-// 바나나 1
-// 배 2
-/* ES6 */
-fruits.forEach((item, index, array) => { console.log(item, array[index]) })
-// 사과 사과
-// 바나나 바나나
-// 배 배
-```
+어플리케이션은 마라톤의 필수 기능입니다.
+각 어플리케이션은 일반적으로 여러 호스트에서 실행되는 많은 인스턴스가있는 long-running service를 나타냅니다.
+어플리케이션 인스턴스를 `Task`라고 부릅니다.
+`Application Definition`은 작업을 유지하고 시작하는데 필요한 모든것을 설명하는 녀석입니다~
 
-## map
----
-배열 내의 모든 요소 각각에 대해 제공된 콜백함수를 호출하고. 그 결과를 모아 _새로운 배열을 반환_ 합니다
-```
-array.map(callback [, thisArg])
-```
-첫번째 인자 `callback(item, index, array)`
-두번째 인자 `thisArg` // 콜백함수 사용시 this로서 사용되는 값
-해당 배열에 따라 새로운 맵을 형성하므로 활용 방법이 정말 다양합니다
+**주의사항**
+>  Marathon은 어플리케이션 이름에 점을 허용하지만 점으로 표시된 이름은 적절한 서비스 검색 동작을 방해 할 수 있습니다. 서비스 검색 매커니즘을 사용하려는 경우, 응용프로그램 이름에 점을 넣으면 안됩니다.
 
-```javascript
-var userArray  = [{id: 1, name: '상익'}, {id: 2, name: '동혁'}, {id: 3, name: '지현'}]
+정식 사이트에서는 Hello Marathon을 띄워보는 인라인쉘 스크립트를 소개하는데요
+같이 한번 도전해보겠습니다.
+stdout으로 print한 이후 5초동안 잠에드는 짓을 반복하는 변태같은 앱입니다.
+그에 관련된 JSON `Application Definition` 입니다.
 
-var newUserArray = userArray.map(function(obj) {
-  var user = [];
-  user.push(obj.id)
-  user.push(obj.name)
-  return user
-});
-console.log(userArray)
-console.log(newUserArray)
-// userArray : [{id: 1, name: '상익'}, {id: 2, name: '동혁'}, {id: 3, name: '지현'}]
-// newUserArray : [[1, "상익"], [2, "동혁"], [3, "지현"]]
-```
-_서버로 부터 userArray를 받아 내가 원하는 2중 배열로 데이터 형태를 바꾼모습_
-
-새로운 배열을 생성해서 리턴하기때문에 메모리관리가 중요한 게임같은 장르에서는 사용이 성능을 잡아먹을 수 있습니다.
-하지만 고성능이 필요하지 않은 웹서비스의 경우, 매우 유용한 데이터 변환 함수입니다.
-다음은 Array의 map함수와 Function객체의 call을 응용한 예제입니다.
-
-```javascript
-var map = Array.prototype.map
-var a = map.call('Hello Aidan', function(x) {
-  return x.charCodeAt(0)
-})
-// string객체 역시 배열객체이기 때문에 인자값
-// 단어 하나하나에 대한 Byte의 아스키코드값을 요소로가지는 배열을 얻는 방법
-// [72, 101, 108, 108, 111, 32, 65, 105, 100, 97, 110] // 공백의 바이트코드는 32
-```
-참고자료
-[MDN 자바스크립트 String.prototype.charCodeAt](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/String/charCodeAt)
-[MDN 자바스크립트 Function.prototype.call](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Function/call)
-
-## filter
----
-VueJS로 댓글플랫폼을 만들면서 가장 많이 사용한 함수입니다.
-MVVM으로 상태관리를 하다보니 관리받고 있는 DataList를 조작해
-제가원하는 리스트로 필터링할 함수가 필요했는데요.
-Filter는 그에 딱맞는 기능을 제공해줍니다.
-
-```
-var newArray = array.filter(callback[, thisArg])
-```
-
-인자로 들어가는 콜백함수에는 `테스트함수`가 들어갑니다.
-테스트함수를 통과한 요소가 있는 새로운 배열을 반환해줍니다~
-신기하죠?? 신기해해주세요
-아무튼 테스트함수에 `리턴값이 true인 요소들에 대해서만 필터`됩니다.
-간단히 예제를 봐볼까요
-
-```javascript
-function isSmallEnough(value) {
-  return value <= 100;
+```json
+{
+    "id": "basic-0",
+    "cmd": "while [ true ] ; do echo 'Hello Marathon' ; sleep 5 ; done",
+    "cpus": 0.1,
+    "mem": 10.0,
+    "instances": 1
 }
-var filtered = [120, 500, 80, 130, 44].filter(isSmallEnough);
-console.log(filtered) // [80, 44]
 ```
-`isSmallEnough라는 함수는 100이하의 값에 대하여 true를 반환합니다.`
-filter함수는 isSmallEnough라는 테스트함수를 사용하여 필터링을 진행,
-테스트를 통과한 요소들로 구성된 새로운 배열을 반환합니다.
-결과값으로 100이하의 값으로 구성된 [80, 44]가 filtered에 담긴것을 확인가능!
 
-```javascript
-ES6를 활용해 한줄로 간단히 내가쓴 댓글목록만 걸러냅니다.
-// username 클라이언트에 저장되어있는 사용자이름을 댓글작성자 이름과 비교해 필터링
-this.commentList = this.commentList.filter((comment) => comment.author === username)
+애플리케이션을 정의하고 실행하면 Marathon이 Mesos로 실행을 넘겨줍니다.
+Mesos는 각 작업에 대한 샌드박스 디렉토리를 만듭니다.
+샌드박스 디렉토리는 실행환경으로 작동하며 관련 로그 파일을 가진 각각의 에이전트 노드의 디렉토리입니다.
+또한 `stderr` 및 `stdout` 스트림도 샌드박스 디렉토리에 기록됩니다.
+![haha](basic-0.png)
+_[마라톤ui]잘돌아가고 있는 베이직제로 인스턴스!! 우측에 보면 Output log인 stdout을 받아봅시다_
+![anan](hellomarathon.png)
+_[stdout파일]"넌 몰랐겠지만 난 찍고 있었어." 5초에 한번씩 열심히 찍고 있었습니다 그는_
+
+어떤 어플리케이션을 실행할려면 대게 파일 또는 파일모음에 의존해야됩니다.
+리소스 할당을 관리하기 위해서 마라톤은 `URI` 개념을 가지고 있습니다.
+URI는 Mesos Fetcher가 특정 리소스를 추출하기 위해 사용됩니다.
+
+일단 다음예제좀 같이 살펴보죠
+```json
+{
+    "id": "basic-1",
+    "cmd": "`chmod u+x cool-script.sh && ./cool-script.sh`",
+    "cpus": 0.1,
+    "mem": 10.0,
+    "instances": 1,
+    "uris": [
+        "https://example.com/app/cool-script.sh"
+    ]
+}
 ```
-자 여러분들은 모르시겠지만 이미 강해졌습니다.
-배열을 다루는데 강력해진 자신의 힘이 실감되시나요?ㅋㅋ
-첫술에 배부를리 없죠. 해당 함수들을 자주 활용하시면서 능숙해지시면됩니다.
-각자의 프로젝트에 잘적용해보시길!
-오늘은 여기까지. 파트2에서 만나요
+
+해당 Definition은 cmd를 실행시키기 이전에
+해당 uri에서 쉘스크립트 파일을 다운로드 받습니다. (메소스를 통해)
+그리고 앱의 작업 샌드박스에서 사용가능하도록 만듭니다.
+
+**참고**
+> 메소스 v.0.22이상에서 Fetcher코드는 더이상 다운로드한 파일을  
+기본적으로 실행 가능하게 만들지는 않습니다.
+위의 예에서 cmd는 파일을 실행가능하게 만듭니다.
+
+즉, 마라톤은 아카이브에 있는 애플리케이션 리소스를 처리하는 방법을 알고 있다는 말이에요.
+현재의 마라톤은 메소스를 통해 cmd를 실행하기전 각종 압축파일들을 압축풀기위한 첫번째 시도를 수행합니다.
+
+다음 예제는 마라톤이 압축리소스파일을 어떻게 다루는지 잘보여줍니다.
+```json
+{
+    "id": "basic-2",
+    "cmd": "app/cool-script.sh",
+    "cpus": 0.1,
+    "mem": 10.0,
+    "instances": 1,
+    "uris": [
+        "https://example.com/app.zip"
+    ]
+}
+```
+
+해당 uri의 압축파일에는 cool-script.sh가 포함되어 있습니다.
+집파일을 다운로드받아 압축을 풀면 zip파일의 내용이 추출되는 위치에 `app.zip` 파일 이름에 따른 디렉토리가 생성됩니다.
+그래서 위에 cmd에서 app이라는 디렉토리의 하위에 있는 스크립트를 실행합니다.
+
+## 도커기반 어플리케이션
+
+마라톤을 사용하면 Docker이미지를 사용하는 어플리케이션을 쉽게 실행할 수 있습니다.
+다음예제는 파이썬3 기반의 앱이며 portMappings라는 컨테이너 옵션을 통해 포트를 매핑합니다.
+호스트 포트는 메소스 에이전트의 임의의 포트에 할당되도록 0을 설정합니다.
+컨테이너 내부에서 웹서버 포트는 8080으로 뚫습니다.
+
+```json
+{
+  "id": "basic-3",
+  "cmd": "python3 -m http.server 8080",
+  "cpus": 0.5,
+  "mem": 32.0,
+  "networks": [ { "mode": "container/bridge" } ],
+  "container": {
+    "type": "DOCKER",
+    "docker": {
+      "image": "python:3"
+    },
+    "portMappings": [
+      { "containerPort": 8080, "hostPort": 0 }
+    ]
+  }
+}
+```
+
+이제 Terminal을 키고 Http API를 사용해서 앱을 배포해봅니다.
+위의 JSON 파일을 `basic-3.json` 으로 저장한뒤
+해당 디렉토리에가서 아래의 curl 명령문을 실행해봅니다.
+여러분이 터치할 부분은 어플리케이션 생성을 요청할 여러분의 마라톤 주소입니다.
+{marathon url} 여기에 여러분의 마라톤 주소를 넣어주세요!
+
+```curl
+curl -X POST {marathon url}/v2/apps -d @basic-3.json -H "Content-type: application/json"
+```
+![nana](curl.png)
+_터미널 창에서 마라톤앱에 http요청을 보내보았습니다~ 요청된 basic-3.json의 디테일이 찍히네요_
+![suc](basic3running.png)
+_잘돌아갑니다_
