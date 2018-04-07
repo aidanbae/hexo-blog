@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          shell-script-1 - Beantech | 豆科技
+        
+    </title>
+
+    <link rel="canonical" href="http://aidanbae.github.io/2018/02/01/shell-script-1/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('null')
+            /*post*/
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/BeanTechSign-white.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                        </div>
+                        <h1>shell-script-1</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Aidan Bae on
+                            2018-02-01
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Aidan</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1 id="유닉스-리눅스-쉘스크립트-공부">유닉스 리눅스 쉘스크립트 공부</h1>
+<blockquote>
+<p>서버 프로그래머로 프로젝트를 진행하다보니 배포과정에서 쉘스크립트에 대한 공부를 좀 해야겠다는<br>
+생각이 들었습니다. 특히 bash에 대한 이해가 뒷받침 된다면 원격지에 있는 서버에 대한 컨트롤이 용이해<br>
+진다는 것은 팩트. 레츠고;;</p>
+</blockquote>
+<p><a href="https://opentutorials.org/course/2598/14204" target="_blank" rel="external">https://opentutorials.org/course/2598/14204</a><br>
+생활코딩 쉘스크립트 기본 강좌를 듣고 오시는 것도 큰도움</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">echo</span> <span class="variable">$0</span></div><div class="line">--bash</div></pre></td></tr></table></figure>
+<p>터미널에 위 명령어를 실행시키면 해당 터미널이 무슨 쉘인지 알수 있습니다.<br>
+Bash도 일종의 프로그램입니다.<br>
+우리는 이 bash를 통해 컴퓨터, 좀 더 자세히는 커널에 명령을 내릴 수 있습니다.<br>
+다른 종류의 쉘프로그램인 zsh도 있습니다.</p>
+<hr>
+<h2 id="read-명령어">read 명령어</h2>
+<p><code>read</code> 명령어는 사용자가 키보드를 사용해 입력하면<br>
+해당 값을 읽어와서 변수에 저장합니다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># vi read.sh</span></div><div class="line"><span class="built_in">echo</span> -n <span class="string">"Enter your ID: "</span></div><div class="line"><span class="built_in">read</span> id</div><div class="line"></div><div class="line"><span class="built_in">echo</span> <span class="string">"Now your ID is <span class="variable">$id</span>"</span></div></pre></td></tr></table></figure>
+<p><em>echo -n옵션을 사용한다면 줄바꿈 없이 메세지를 출력할 수 있습니다</em><br>
+<img src="screenshot.png" alt="ho"><br>
+여러입력을 받고 싶다면 스페이스로 구분지어 입력받을 수 있습니다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">read</span> id name pswd</div><div class="line"><span class="built_in">echo</span> <span class="string">"your name is <span class="variable">$name</span>"</span></div></pre></td></tr></table></figure>
+<hr>
+<h2 id="echo_back-명령어">echo_back 명령어</h2>
+<p>맥의 터미널을 처음 접했을때<br>
+비밀번호가 타이핑되지않고 아무것도 보여주지않아서 혼란스러웠던적이 있었습니다<br>
+’왜 안쳐지지…?'<br>
+하지만 뒤에서 쳐지고있는거였죠. 안보일뿐!</p>
+<p><code>에코백</code>은 사용자가 암호를 입력하는 처리에서 화면에 표시하지 않고자할때 쓰입니다.<br>
+누군가 화면을 훔쳐볼 가능성이 있기 때문에<br>
+보안상 에코백을 끄는(off)게 보통입니다</p>
+<p>생각보다 엄청간단해요!</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># vi pass_wget.sh</span></div><div class="line">username=guest</div><div class="line">hostname=localhost</div><div class="line"></div><div class="line"><span class="built_in">echo</span> -n <span class="string">"Password: "</span></div><div class="line">stty -<span class="built_in">echo</span> <span class="comment"># 에코백을 끕니다</span></div><div class="line"><span class="built_in">read</span> password</div><div class="line">stty <span class="built_in">echo</span> <span class="comment"># 에코백을 이제 킵니다. 설정이 남아있기때문이죠</span></div><div class="line"></div><div class="line"><span class="built_in">echo</span></div><div class="line"></div><div class="line"><span class="comment"># wget이 설치되어 있는 경우</span></div><div class="line">wget -q --password=<span class="string">"<span class="variable">$password</span>"</span> <span class="string">"ftp://<span class="variable">$&#123;username&#125;</span>@&#123;hostname&#125;/filename.txt"</span></div><div class="line"><span class="comment"># 맥의 경우, wget이 설치되어있지 않습니다. 그럴경우 curl명령어를 활용합니다</span></div><div class="line">curl -s -u <span class="string">"<span class="variable">$&#123;username&#125;</span>:<span class="variable">$&#123;password&#125;</span>"</span> -0 <span class="string">"ftp://<span class="variable">$&#123;hostname&#125;</span>/filename.txt"</span></div></pre></td></tr></table></figure>
+<p>입력한 암호를 통해 ftp서버에서 파일을 내려받습니다.<br>
+wget의 -q옵션(quiet모드)을 통해 동작상태가 출력되지 않도록 파일 내려받기만 하도록 지정합니다.</p>
+<hr>
+<h2 id="사용자-키입력을-한글자만-받아내기">사용자 키입력을 한글자만 받아내기</h2>
+<p>터미널을 통해 파일들을 다운받는 행위를 할때면 사용자의 동의를 구하곤합니다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Type Your Answer [y/n]:</div></pre></td></tr></table></figure>
+<p>이런화면을 자주만나죠<br>
+한번 구현해보겠습니다</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#vi getchar.sh</span></div><div class="line"></div><div class="line"><span class="built_in">echo</span> -n <span class="string">"Type your answer [y/n]: "</span></div><div class="line"><span class="comment"># 현재 터미널의 설정을 셀변수에 백업</span></div><div class="line"><span class="comment"># 터미널을 raw설정합니다.</span></div><div class="line">tty_state=$(stty -g)</div><div class="line">stty raw</div><div class="line"><span class="comment"># 키보드에서 문자하나 읽기</span></div><div class="line">char=$(dd bs=1 count=1 2&gt; /dev/null)</div><div class="line"><span class="comment"># 터미널 설정을 원래대로 돌림</span></div><div class="line">stty <span class="string">"<span class="variable">$tty_state</span>"</span></div><div class="line"></div><div class="line"><span class="built_in">echo</span></div><div class="line"></div><div class="line"><span class="keyword">case</span> <span class="string">"<span class="variable">$char</span>"</span> <span class="keyword">in</span></div><div class="line">  [yY])</div><div class="line">  <span class="built_in">echo</span> <span class="string">"input: Yes"</span></div><div class="line">  ;;</div><div class="line">  [nN])</div><div class="line">  <span class="built_in">echo</span> <span class="string">"input: no"</span></div><div class="line">  ;;</div><div class="line">  *)</div><div class="line">  <span class="built_in">echo</span> <span class="string">"input WTF"</span></div><div class="line">  ;;</div><div class="line"><span class="keyword">esac</span></div></pre></td></tr></table></figure>
+<p>에코백 예제와 비슷하게<br>
+상태를 되돌리는 것이 중요합니다.<br>
+현재 터미널의 상태를 쉘변수에 백업해둡니다. <code>(tty_state)</code><br>
+<code>stty</code> 명령어는 터미널(단말) 상태를 설정하는 명령어입니다.<br>
+<code>stty raw</code>를 통해 터미널을 raw모드로 변경하면<br>
+키 버퍼 처리를 하지 않아 문자마다 처리가 가능합니다.</p>
+<p><strong>현재 터미널 설정 표시</strong><br>
+<img src="hoho.png" alt="josu"></p>
+<p>raw모드로 할경우 현재 터미널 설정이 지워지므로 저장을 꼭해야합니다!</p>
+<p>이어서 실제 키입력값은 다음 <code>dd</code>명령어에 직접 전달됩니다.</p>
+<blockquote>
+<p>dd 명령어에서는 입출력의 블록크기를 1 (bs=1)<br>
+입력에서 출력으로 복사하는 블록 수를 1(count=1)로 해서<br>
+입력된 문자를 셸 변수 char에 설정합니다</p>
+</blockquote>
+<p>또한 dd 명령어 실행메세지는 필요없으므로 /dev/null로 리다이렉트해서 버립니다.<br>
+이후 case문을 이용해 입력된 값에 따른 분기처리합니다~</p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2018/02/01/shell-script-2/" data-toggle="tooltip" data-placement="top" title="shell-script-2">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/01/25/mesos-part-2/" data-toggle="tooltip" data-placement="top" title="마라톤 어플리케이션 - 2">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#유닉스-리눅스-쉘스크립트-공부"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">유닉스 리눅스 쉘스크립트 공부</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#read-명령어"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">read 명령어</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#echo_back-명령어"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">echo_back 명령어</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#사용자-키입력을-한글자만-받아내기"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">사용자 키입력을 한글자만 받아내기</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://beantech.org" target="_blank">Bean Tech</a></li>
+                    
+                        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
+                    
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">It Helps SEO</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "SangikBae";
+    var disqus_identifier = "http://aidanbae.github.io/2018/02/01/shell-script-1/";
+    var disqus_url = "http://aidanbae.github.io/2018/02/01/shell-script-1/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/SangikBae">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/aidanbae">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Aidan Bae 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://aidanbae.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://aidanbae.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

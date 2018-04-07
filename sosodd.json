@@ -1,0 +1,47 @@
+[{
+    "id": "/quiz-platform/admin",
+    "cmd": "./entrypoint.sh",
+    "cpus": 0.1,
+    "mem": 512,
+    "disk": 0,
+    "instances": 1,
+    "constraints": [
+        ["hostname", "LIKE", "dkos-snackgame-dev-slave-1.pg1.krane.9rum.cc"]
+    ],
+    "acceptedResourceRoles": ["*"],
+    "container": {
+        "type": "DOCKER",
+        "volumes": [{
+            "containerPath": "/sqlitedata",
+            "hostPath": "/home/deploy/quiz-platform",
+            "mode": "RW"
+        }],
+        "docker": {
+            "image": "idock.daumkakao.io/game_platform_dev/quiz-platform:$GO_DEPENDENCY_LABEL_UPSTREAM",
+            "network": "BRIDGE",
+            "portMappings": [{
+                "containerPort": 8000,
+                "hostPort": 0,
+                "servicePort": 10000,
+                "protocol": "tcp",
+                "labels": {}
+            }],
+            "privileged": false,
+            "parameters": [],
+            "forcePullImage": true
+        }
+    },
+    "healthChecks": [{
+        "protocol": "TCP",
+        "portIndex": 0,
+        "gracePeriodSeconds": 300,
+        "intervalSeconds": 60,
+        "timeoutSeconds": 20,
+        "maxConsecutiveFailures": 3,
+        "ignoreHttp1xx": false
+    }],
+    "labels": {
+        "HAPROXY_0_VHOST": "quiz-platform.dev.9rum.cc",
+        "HAPROXY_GROUP": "external"
+    }
+}]

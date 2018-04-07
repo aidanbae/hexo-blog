@@ -2,36 +2,29 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
-        <loc>http://aidanbae.github.io/tags/Hexo/</loc>
-        <lastmod>2017-06-08T17:57:44.000Z</lastmod>
+        <loc>http://aidanbae.github.io/tags/Array/</loc>
+        <lastmod>2017-12-06T08:49:37.560Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://aidanbae.github.io/tags/Blog/</loc>
-        <lastmod>2017-06-08T17:57:44.000Z</lastmod>
+        <loc>http://aidanbae.github.io/tags/forEach/</loc>
+        <lastmod>2017-12-06T08:49:37.560Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://aidanbae.github.io/tags/%EB%8B%88%EC%B2%B4/</loc>
-        <lastmod>2017-06-08T18:53:24.000Z</lastmod>
+        <loc>http://aidanbae.github.io/tags/map/</loc>
+        <lastmod>2017-12-06T08:49:37.560Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
-        <loc>http://aidanbae.github.io/tags/%EB%A7%8C%EB%B3%B4%EA%B0%9D/</loc>
-        <lastmod>2017-06-08T18:53:24.000Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>http://aidanbae.github.io/tags/%ED%94%BC%EB%B2%97/</loc>
-        <lastmod>2017-06-08T18:53:24.000Z</lastmod>
+        <loc>http://aidanbae.github.io/tags/filter/</loc>
+        <lastmod>2017-12-06T08:49:37.560Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          마라톤 어플리케이션 - 2 - Beantech | 豆科技
+        
+    </title>
+
+    <link rel="canonical" href="http://aidanbae.github.io/2018/01/25/mesos-part-2/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('null')
+            /*post*/
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/BeanTechSign-white.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                        </div>
+                        <h1>마라톤 어플리케이션 - 2</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                            Posted by Aidan Bae on
+                            2018-01-25
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Aidan</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <blockquote>
+<p>아래 문서는 마라톤 공식Document를 번역 및 응용한 결과물입니다.<br>
+(<a href="https://mesosphere.github.io/marathon/docs/deployments.html" target="_blank" rel="external">https://mesosphere.github.io/marathon/docs/deployments.html</a>)</p>
+</blockquote>
+<hr>
+<h1 id="marathon-application-deployment">Marathon Application Deployment</h1>
+<p>마라톤 어플리케이션 배포</p>
+<p>마라톤에서 어플리케이션 또는 그룹의 정의가 변경 될 때마다 배포가 수행됩니다.<br>
+배포는 다음 작업을 수행 할 수 있는 일련의 작업입니다.</p>
+<ul>
+<li>하나 이상의 어플리케이션을 시작 또는 중지</li>
+<li>하나 이상의 어플리케이션을 업그레이드</li>
+<li>하나 이상의 어플리케이션을 스케일조정</li>
+</ul>
+<p>배포에는 시간이 걸리고 즉시 사용할 수 없습니다.<br>
+성공적으로 마칠 때까지 마라톤에서 배포가 활성된 것으로 간주.</p>
+<h2 id="종속성">종속성</h2>
+<p>종속성이 없는 어플리케이션은 제한없이 순서에 상관없이 배포할 수 있습니다.<br>
+하지만 있는 경우에는 필요한 순서로 배치 작업이 수행됩니다.</p>
+<p><img src="dependency.png" alt="hoho"></p>
+<h3 id="데이터베이스">데이터베이스</h3>
+<ul>
+<li>Starting: 만약 DB 와 어플리케이션이 시스템에 추가되면. db가 앱보다 먼저 실행됩니다.</li>
+<li>Stopping: 만약 DB와 어플리케이션이 시스템에서 제거되면. 앱이먼저 제거되고 나서 디비가 제거됩니다.</li>
+<li>Upgrade: 롤링 재시작</li>
+<li>Scaling: 만약 디비와 앱이 스케일링을 하는 경우, 디비가 먼저 반응하고나서 앱이 반응합니다.</li>
+</ul>
+<h2 id="rolling-restarts">Rolling Restarts</h2>
+<p>롤링 재시작은 마라톤이 새버전의 어플리케이션을 배포하는데 사용됩니다.<br>
+일반적으로 새버전의 앱을 배포하는데에는 두단계가 필요합니다.</p>
+<ul>
+<li>새 버전으로 일련의 프로세스를 시작하고</li>
+<li>이전버전의 프로세스 집합을 중지하는 것입니다.</li>
+</ul>
+<p>마라톤에서 롤링재시작을 할 수 있습니다. 업그레이드 전략 <code>minimumHealthCapacity</code> 을 정의합니다.</p>
+<p><code>minimumHealthCapacity</code>는 인스턴스 카운트에 적용될 때 업데이트 중<br>
+특정 버전의 응용 프로그램이 항상 유지해야하는 정상 인스턴스 수를 정의하는 <code>백분율</code>입니다.</p>
+<ul>
+<li>minimumHealthCapacity == 0: 새 버전이 배포되기 전에 <code>모든 이전 인스턴스가 종료</code> 될 수 있습니다.</li>
+<li>minimumHealthCapacity == 1: 이전 버전이 중지되기 전에 새 버전의 모든 인스턴스가 나란히 배치됩니다.</li>
+<li>minimumHealthCapacity 0에서 1사이: 이전 버전을 minimumHealthCapacity로 확장하고<br>
+minimumHealthCapacity과 나란히 새버전을 시작합니다. 이 작업이 성공적으로 진행되면 새 버전의 크기가 100%로 조정되고 이전 버전이 중지됩니다.</li>
+</ul>
+<p>의존성이 있다면 이것은 더 복잡해집니다.<br>
+위의 예에서 응용 프로그램이 업데이트되면 Marathon은 다음 작업을 수행합니다.</p>
+<ol>
+<li>모든 인스턴스가 대체되고 준비가 완료될때까지 applicaiton db를 업그레이드한다.</li>
+<li>모든 인스턴스가 교체되고 준비가 되었으며, Healthy 할 때까지 응용 프로그램을 업그레이드 (upgradeStrategy 고려사항)</li>
+</ol>
+<p><strong>참고</strong><br>
+minimumHealthCapacity 0.5 이상을 선택하면 클러스터의 업데이트 프로세스에 사용할 수 있는 용량이 더 있어야합니다. 만약 minimumHealthCapacity 0.5보다 더 동일한 앱의 인스턴스의 절반 이상이 나란히 실행된다. 이러한 용량 제약 조건은 종속성이 있는 경우 함께 추가됩니다. 우리의 예에서는 db에 0.6 app에 0.8을 정의했습니다.<br>
+즉, 업데이트가 실행되면 12개의 db인스턴스와 32개의 app 인스턴스(16개 및 16개 신규)가 나란히 실행됩니다.</p>
+<h2 id="force-a-deployment">Force a Deployment</h2>
+<p>애플리케이션은 한번에 하나의 배포로만 변경할 수 있습니다.<br>
+앱의 다른 변경사항은 첫번째 배포가 완료 될 때까지 대기해야합니다.<br>
+강제 플래그를 사용하여 배치를 실행하여 이 규칙을 어길 수 있습니다.<br>
+REST 인터페이스는 모든 상태 변경 조작에 강제 플래그를 허용합니다.</p>
+<p>주의: force플래그는 배포가 실패한 경우에만 사용해야합니다!</p>
+<p>강제 플래그가 설정되면 이 배포의 영향을 받는 모든 배포가 취소됩니다. 이 작업으로 인해 시스템이 일관성 없는 상태로 남을 수 있습니다. 특히 앱이 롤링 업그레이드 중에 있을 때 배포가 취소되면 일부 오래된 작업과 일부 새로운 작업이 실행되는 상태가 될 수 있습니다. 새 배포로 해당 응용 프로그램이 업데이트 되지 않으면 해당 어플에 대한 이후 배포가 이루어질 때까지 해당 배포가 해당 상태로 유지됩니다.</p>
+<p>안전하게 강제 업데이트 할 수 있는 유일한 배포 유형은 단일 앱에만 영향을 미치는 배포 유형뿐입니다.<br>
+여러 앱에 영향을 주는 배포를 강제하는 유일한 이유는 실패한 배포를 해결하기 위해서입니다.</p>
+<h2 id="a-failed-deployment">A Failed Deployment</h2>
+<p>실패한 배포<br>
+배포는 하나씩 차례로 실행되는 단계로 구성됩니다.<br>
+다음 단계는 이전 단계가 성공적으로 완료된 경우에만 실행됩니다.<br>
+단계가 성공적으로 끝나지 않을 상황이 있습니다. 다음은 그 상황들입니다.</p>
+<ul>
+<li>새 어플리케이션이 올바르게 시작되지 않았다.</li>
+<li>새로운 어플리케이션이 heathy상태가 되지않는다.</li>
+<li>새 어플리케이션의 종속성이 선언되지 않았으므로 사용할 수 없습니다.</li>
+<li>클러스터 용량이 소진되었습니다.</li>
+<li>앱은 도커 컨테이너를 사용하며 마라톤에서 도커컨테이너 실행시 구성변경이 이루어지지 않았습니다.</li>
+</ul>
+<p>이런경우 배포는 영원히 수행됩니다. 시스템을 치료하려면 현재 배포의 문제를 해결하고 새로운 배포를 적용해야합니다.</p>
+<h2 id="v2deployments-endpoint">/v2/deployments endpoint</h2>
+<p>실행중인 배포목록은 /v2/deployments endpoint를 통해 엑세스할 수 있습니다. 모든 배포에 사용할 수 있는 몇가지 정보가 있습니다.</p>
+<ul>
+<li>affectedApps: 이 배포의 영향을 받는 어플리케이션</li>
+<li>steps: 이 배포를 위해 수행할 단계입니다</li>
+<li>currentStep: 현재 수행하고 있는 단계.</li>
+</ul>
+<p>모든 단계는 몇가지 액션들을 가지고 있습니다. 단계 내 액션들은 동시에 수행됩니다. 가능한 액션은 다음과같다</p>
+<ul>
+<li>StartApplication: 지정된 어플리케이션을 시작하십시오.</li>
+<li>StopApplication: 지정된 어플리케이션을 중지하십시오.</li>
+<li>ScaleApplication: 지정된 어플리케이션의 크기를 조정합니다.</li>
+<li>RestartApplication: 지정된 어플리케이션을 minimumHealthCapacity</li>
+<li>KillAllOldTasksOf: 지정된 어플리케이션의 나머지작업을 종료.</li>
+</ul>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2018/02/01/shell-script-1/" data-toggle="tooltip" data-placement="top" title="shell-script-1">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/01/24/mesos-part-1/" data-toggle="tooltip" data-placement="top" title="마라톤 어플리케이션 - 1">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#marathon-application-deployment"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">Marathon Application Deployment</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#종속성"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">종속성</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#데이터베이스"><span class="toc-nav-number">1.1.1.</span> <span class="toc-nav-text">데이터베이스</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#rolling-restarts"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">Rolling Restarts</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#force-a-deployment"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">Force a Deployment</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#a-failed-deployment"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">A Failed Deployment</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#v2deployments-endpoint"><span class="toc-nav-number">1.5.</span> <span class="toc-nav-text">/v2/deployments endpoint</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://beantech.org" target="_blank">Bean Tech</a></li>
+                    
+                        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
+                    
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">It Helps SEO</a></li>
+                    
+                </ul>
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "SangikBae";
+    var disqus_identifier = "http://aidanbae.github.io/2018/01/25/mesos-part-2/";
+    var disqus_url = "http://aidanbae.github.io/2018/01/25/mesos-part-2/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/SangikBae">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/aidanbae">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Aidan Bae 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://aidanbae.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-XXXXXXXX-X';
+    var _gaDomain = 'yoursite';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://aidanbae.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

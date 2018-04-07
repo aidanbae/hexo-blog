@@ -7,16 +7,80 @@
     </url>
 
     <url>
-        <loc>http://aidanbae.github.io/2017/06/09/sangik/</loc>
-        <lastmod>2017-06-08T18:53:24.000Z</lastmod>
+        <loc>http://aidanbae.github.io/2018/03/23/golang-design-p-02/</loc>
+        <lastmod>2018-03-23T13:06:42.567Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
     </url>
 
     <url>
-        <loc>http://aidanbae.github.io/2017/03/18/hexo-theme-beantech/</loc>
-        <lastmod>2017-06-08T17:57:44.000Z</lastmod>
+        <loc>http://aidanbae.github.io/2018/03/18/golang-design-p-01/</loc>
+        <lastmod>2018-03-23T11:10:53.568Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aidanbae.github.io/2018/02/12/marathon-registry/</loc>
+        <lastmod>2018-02-12T07:04:22.963Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aidanbae.github.io/2018/02/07/linux-1/</loc>
+        <lastmod>2018-02-07T02:52:09.753Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aidanbae.github.io/2018/02/01/shell-script-2/</loc>
+        <lastmod>2018-02-01T10:02:36.317Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aidanbae.github.io/2018/02/01/shell-script-1/</loc>
+        <lastmod>2018-02-01T08:32:42.462Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aidanbae.github.io/2018/01/24/mesos-part-1/</loc>
+        <lastmod>2018-02-01T07:04:11.354Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aidanbae.github.io/2018/01/25/mesos-part-2/</loc>
+        <lastmod>2018-02-01T07:03:49.150Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aidanbae.github.io/2017/12/06/javascript-part-2/</loc>
+        <lastmod>2018-01-24T09:35:31.701Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://aidanbae.github.io/2017/12/06/javascript-part-1/</loc>
+        <lastmod>2017-12-06T08:49:37.560Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
